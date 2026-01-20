@@ -46,7 +46,7 @@ The AI model should read the following context files:
    - Path: `.asdm/workspace/features/<feature-id>-<feature-name>/<task-id>-<task-name>-prd.md`
    - Purpose: Provides detailed requirements for specific tasks
    - Load only for tasks being executed
-   - If a task PRD doesn't exist, inform the user and prompt them to use `/asdm-task-breakdown` to generate it
+   - If a task PRD doesn't exist, inform the user and prompt them to use `/asdm-prd-breakdown` to generate it
 
 4. **Additional Context** (Optional - On-Demand)
    - Only after reviewing the task list and feature PRD, if additional context is needed
@@ -69,7 +69,7 @@ To avoid overwhelming the AI model with excessive context, follow this progressi
 
 2. **Selection Phase** (During task selection):
    - Load task PRDs for selected tasks
-   - If a task PRD doesn't exist, inform the user and prompt them to use `/asdm-task-breakdown` to generate it first
+   - If a task PRD doesn't exist, inform the user and prompt them to use `/asdm-prd-breakdown` to generate it first
 
 3. **Execution Phase** (During task execution):
    - Load additional context files only when specifically needed for implementation
@@ -89,7 +89,7 @@ Identify the feature to execute tasks for:
 - Accept a feature ID or feature name from the user
 - Validate the feature directory exists: `.asdm/workspace/features/<feature-id>-<feature-name>/`
 - Validate the task list exists: `.asdm/workspace/features/<feature-id>-<feature-name>/task-list.md`
-- If the feature or task list doesn't exist, inform the user and suggest using `/asdm-task-planning` first
+- If the feature or task list doesn't exist, inform the user and suggest using `/asdm-prd-planning` first
 
 ### 2. Load Feature Context
 Load the necessary context files:
@@ -118,7 +118,7 @@ Check if a task PRD exists for the selected task:
 - If the task PRD doesn't exist:
   - Inform the user that the task PRD is missing
   - Explain that task PRD is required for proper task execution
-  - Prompt the user to use `/asdm-task-breakdown` to generate the task PRD first
+  - Prompt the user to use `/asdm-prd-breakdown` to generate the task PRD first
   - Offer to generate all missing task PRDs or only the selected task's PRD
   - Wait for user confirmation before proceeding
   - Stop the execution process until task PRDs are generated
@@ -376,7 +376,7 @@ To use this instruction, the AI model should:
 4. **Load Context**: Read task list, feature PRD, and any additional context files
 5. **Present Tasks**: Display available tasks with their status to the user
 6. **Select Task**: Either use user-specified task ID or prompt user to select a task
-7. **Check Task PRD**: Verify task PRD exists, prompt user to use `/asdm-task-breakdown` if missing
+7. **Check Task PRD**: Verify task PRD exists, prompt user to use `/asdm-prd-breakdown` if missing
 8. **Confirm Execution**: Present task details and get user confirmation
 9. **Update Status**: Mark task as `IN PROGRESS` in the task list
 10. **Execute Task**: Implement the task based on task PRD requirements
@@ -449,7 +449,7 @@ After completing task execution, the following outputs will be generated:
 - **Task PRD** (must exist before execution):
   - Path: `.asdm/workspace/features/<feature-id>-<feature-name>/<task-id>-<task-name>-prd.md`
   - Contains detailed task requirements and guidance
-  - If missing, user should use `/asdm-task-breakdown` to generate it first
+  - If missing, user should use `/asdm-prd-breakdown` to generate it first
 
 ### Updated Documents
 - **Task List**: Updated with current task status
@@ -547,7 +547,7 @@ When executing multiple tasks:
 
 #### Feature Not Found
 - **Error**: Feature directory or task list doesn't exist
-- **Solution**: Inform the user and suggest using `/asdm-task-planning` to create the feature first
+- **Solution**: Inform the user and suggest using `/asdm-prd-planning` to create the feature first
 
 #### Task Not Found
 - **Error**: Specified task ID doesn't exist in the task list
@@ -577,7 +577,7 @@ When executing multiple tasks:
 
 #### Task PRD Missing
 - **Error**: Task PRD doesn't exist for the selected task
-- **Solution**: Prompt user to use `/asdm-task-breakdown` to generate the task PRD first
+- **Solution**: Prompt user to use `/asdm-prd-breakdown` to generate the task PRD first
   - Explain that task PRD is required for proper execution
   - Offer to generate all missing task PRDs or only the selected task's PRD
   - Wait for user to complete task breakdown before proceeding with execution
@@ -602,14 +602,14 @@ When execution fails or is blocked:
 
 ## Integration with Other Actions
 
-### asdm-task-planning
-- Use `/asdm-task-planning` to create new features and task plans
+### asdm-prd-planning
+- Use `/asdm-prd-planning` to create new features and task plans
 - Ensure feature and task list exist before attempting execution
 
-### asdm-task-breakdown
-- Use `/asdm-task-breakdown` to generate task PRDs for all tasks before execution
+### asdm-prd-breakdown
+- Use `/asdm-prd-breakdown` to generate task PRDs for all tasks before execution
 - Task PRDs must exist before task execution can proceed
-- If task PRD is missing during execution, user will be prompted to use `/asdm-task-breakdown` first
+- If task PRD is missing during execution, user will be prompted to use `/asdm-prd-breakdown` first
 
 ### Context Builder
 - Reference project context from `.asdm/contexts/`

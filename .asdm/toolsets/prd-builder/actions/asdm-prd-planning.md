@@ -1,4 +1,4 @@
-# Instructions for asdm-task-planning action
+# Instructions for asdm-prd-planning action
 
 ## Purpose
 This instruction guides the AI model to plan tasks for a feature using Task Planner & Executor toolset. It generates a feature PRD and creates a task plan. Individual task PRDs are generated during the execution phase.
@@ -154,4 +154,4 @@ After completing the planning phase, the following artifacts will be generated:
 - Feature PRD document
 - Updated features list
 
-These documents serve as the foundation for the task breakdown phase (asdm-task-breakdown action), where a comprehensive task list and individual task PRDs will be generated.
+These documents serve as the foundation for the task breakdown phase (asdm-prd-breakdown action), where a comprehensive task list and individual task PRDs will be generated.

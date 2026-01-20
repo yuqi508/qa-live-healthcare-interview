@@ -1,4 +1,4 @@
-# Instructions for asdm-task-breakdown action
+# Instructions for asdm-prd-breakdown action
 
 ## Purpose
 This instruction guides the AI model to break down tasks for a feature using Task Planner & Executor toolset. It first generates a comprehensive task list based on the feature PRD, then creates detailed task PRD documents for each task in the task list.
@@ -79,7 +79,7 @@ To avoid overwhelming the AI model with excessive context, follow this progressi
 Identify the feature to break down tasks for:
 - Accept a feature ID or feature name from the user
 - Validate the feature directory exists: `.asdm/workspace/features/<feature-id>-<feature-name>/`
-- If the feature doesn't exist, inform the user and suggest using `/asdm-task-planning` first
+- If the feature doesn't exist, inform the user and suggest using `/asdm-prd-planning` first
 
 ### 2. Load Feature Context
 Load the necessary context files:
@@ -217,7 +217,7 @@ These documents serve as the foundation for the execution phase (asdm-task-execu
 
 #### Feature Not Found
 - **Error**: Feature directory or feature PRD doesn't exist
-- **Solution**: Inform the user and suggest using `/asdm-task-planning` to create the feature first
+- **Solution**: Inform the user and suggest using `/asdm-prd-planning` to create the feature first
 
 #### Task List Not Found
 - **Behavior**: Task list doesn't exist in the feature directory
