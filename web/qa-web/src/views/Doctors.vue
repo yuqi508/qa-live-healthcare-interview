@@ -8,16 +8,16 @@
     <div class="doctors-container">
       <div class="doctors-grid">
         <a-card
-          v-for="doctor in allDoctors"
+          v-for="doctor in doctors"
           :key="doctor.id"
           class="doctor-card"
-          :class="{ 'active': doctor.isActive }"
+          :class="{ 'active': doctor.active }"
         >
           <div class="card-header">
             <img :src="doctor.avatar" :alt="doctor.name" class="doctor-avatar" />
             <a-badge
-              :status="doctor.isActive ? 'processing' : 'default'"
-              :text="doctor.isActive ? '在线' : '离线'"
+              :status="doctor.active ? 'processing' : 'default'"
+              :text="doctor.active ? '在线' : '离线'"
             />
           </div>
           <div class="card-body">
@@ -35,10 +35,10 @@
             <a-button
               type="primary"
               block
-              :disabled="!doctor.isActive"
+              :disabled="!doctor.active"
               @click="goToConsultation(doctor)"
             >
-              {{ doctor.isActive ? '进入诊室' : '暂未开放' }}
+              {{ doctor.active ? '进入诊室' : '暂未开放' }}
             </a-button>
           </div>
         </a-card>
@@ -51,14 +51,33 @@
 import { computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { store, Doctor } from '../store';
+import { onMounted, reactive, ref, toRefs } from "vue";
+import {listDoctor} from "@/api/doctors.ts";
 
 const router = useRouter();
+
+
+
+const state = reactive({
+
+  doctors: []
+})
+const { doctors } = toRefs(state);
+
 
 const allDoctors = computed(() => store.state.doctors);
 
 const goToConsultation = (doctor: Doctor) => {
   router.push(`/consultation/${doctor.username}`);
 };
+
+onMounted(async()=>{
+  const res = await listDoctor()
+  console.log(res)
+  state.doctors = res.data
+  console.log(state.doctors)
+})
+
 </script>
 
 <style scoped>

@@ -127,12 +127,17 @@ import {
   CheckOutlined
 } from '@ant-design/icons-vue';
 import { store, Question } from '../store';
+import { useUserStore } from '@/store/modules/user'
+
 
 const route = useRoute();
 const router = useRouter();
 
+const userStore = useUserStore()
+
 const username = route.params.username as string;
-const currentDoctor = computed(() => store.state.currentDoctor);
+
+const currentDoctor = computed(() => userStore.doctor);
 const roomUrl = computed(() => `${window.location.origin}/consultation/${username}`);
 
 const pendingQuestions = computed(() =>
@@ -153,10 +158,10 @@ const answerText = ref('');
 const submitting = ref(false);
 
 onMounted(() => {
-  if (!currentDoctor.value || currentDoctor.value.username !== username) {
-    message.error('请先登录');
-    router.push('/doctor/login');
-  }
+  // if (!currentDoctor.value || currentDoctor.value.username !== username) {
+  //   message.error('请先登录');
+  //   router.push('/doctor/login');
+  // }
 });
 
 const copyRoomUrl = () => {

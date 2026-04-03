@@ -37,7 +37,7 @@
         </a-form-item>
 
         <a-form-item>
-          <a-button type="primary" html-type="submit" size="large" block :loading="loading">
+          <a-button type="primary" @click="onFinish" size="large" block :loading="loading">
             登录
           </a-button>
         </a-form-item>
@@ -59,14 +59,17 @@ import { reactive, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { message } from 'ant-design-vue';
 import { UserOutlined, LockOutlined } from '@ant-design/icons-vue';
-import { store } from '../store';
+import { useUserStore } from '@/store/modules/user'
+
+
+const userStore = useUserStore();
 
 const router = useRouter();
 const loading = ref(false);
 
 const formState = reactive({
-  username: '',
-  password: '',
+  username: 'dr-zhang-wei',
+  password: '123456',
 });
 
 const rules = {
@@ -75,20 +78,25 @@ const rules = {
 };
 
 const onFinish = async () => {
-  loading.value = true;
 
-  setTimeout(() => {
-    const doctor = store.loginDoctor(formState.username, formState.password);
+  // const doctor = store.loginDoctor(formState.username, formState.password);
 
-    if (doctor) {
-      message.success('登录成功');
-      router.push(`/doctor/room/${doctor.username}`);
-    } else {
-      message.error('用户名或密码错误');
-    }
+  const loginForm = {
+    username: formState.username,
+    password: formState.password
+  };
 
-    loading.value = false;
-  }, 500);
+  // 用户登录
+  userStore.doctorLoginAction(loginForm)
+      .then(async() => {
+        await userStore.getDoctorInfoAction(loginForm.username)
+
+        message.success('登录成功');
+        router.push(`/doctor/room/${userStore.doctor.username}`);
+      })
+      .catch(() => {
+        message.error('用户名或密码错误');
+      });
 };
 </script>
 

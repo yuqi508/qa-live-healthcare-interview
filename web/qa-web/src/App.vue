@@ -2,15 +2,23 @@
 import { RouterView } from 'vue-router';
 import AppHeader from './components/AppHeader.vue';
 import AppFooter from './components/AppFooter.vue';
+import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+const { locale } = useI18n()
+const localew = computed(() => locale.value)
+
 </script>
 
 <template>
   <a-layout class="app-layout">
+<!--    <a-config-provider :locale="localew">-->
     <AppHeader />
     <a-layout-content class="app-content">
       <RouterView />
     </a-layout-content>
     <AppFooter />
+<!--    </a-config-provider>-->
   </a-layout>
 </template>
 

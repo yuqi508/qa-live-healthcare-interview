@@ -173,10 +173,12 @@ import {
   PlusOutlined
 } from '@ant-design/icons-vue';
 import { store, Doctor } from '../store';
+import {useUserStore} from "@/store/modules/user.ts";
 
 const route = useRoute();
+const userStore = useUserStore()
 
-const currentPatient = computed(() => store.state.currentPatient);
+const currentPatient = computed(() => userStore.patient);
 const myQuestions = computed(() =>
   currentPatient.value
     ? store.getQuestionsByPatient(currentPatient.value.id)

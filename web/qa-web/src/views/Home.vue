@@ -2,7 +2,7 @@
   <div class="home">
     <section class="hero">
       <div class="hero-content">
-        <h1>专业在线医疗问诊平台</h1>
+        <h1>{{ $t('home.title') }}</h1>
         <p class="hero-subtitle">连接专业医生与患者,提供便捷、高效的医疗咨询服务</p>
         <div class="hero-features">
           <div class="feature-item">

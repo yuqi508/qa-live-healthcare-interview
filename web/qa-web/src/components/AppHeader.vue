@@ -22,19 +22,29 @@
           <InfoCircleOutlined />
           关于
         </a-menu-item>
+        <a-menu-item>
+        <Lang/>
+        </a-menu-item>
       </a-menu>
       <a-button type="primary" class="login-btn" @click="navigateTo('/doctor/login')">
         <UserOutlined />
         医生登录
       </a-button>
+      <a-button type="primary" class="login-btn" @click="navigateTo('/patient/login')">
+        <UserOutlined />
+        患者登录
+      </a-button>
     </div>
   </a-layout-header>
 </template>
+
 
 <script setup lang="ts">
 import { ref, watch } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { HomeOutlined, MessageOutlined, TeamOutlined, InfoCircleOutlined, UserOutlined } from '@ant-design/icons-vue';
+
+import Lang from './Lang.vue'
 
 const router = useRouter();
 const route = useRoute();
